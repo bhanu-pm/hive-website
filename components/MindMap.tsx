@@ -115,7 +115,7 @@ const MindMap: React.FC = () => {
 
     try {
       const ai = new GoogleGenerativeAI(process.env.NEXT_PUBLIC_GEMINI_API_KEY as string)
-      const model = ai.getGenerativeModel({ model: "gemini-1.5-flash-pro" })
+      const model = ai.getGenerativeModel({ model: "gemini-2.5-flash-lite" })
       const result = await model.generateContent(parentNode.text)
       const latResponse = await result.response
       const { x: uqtX, y: uqtY } = calculateNewNodePosition(latNode)
