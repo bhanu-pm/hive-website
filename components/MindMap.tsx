@@ -2,6 +2,7 @@
 
 import type React from "react"
 import { useState, useEffect, useCallback } from "react"
+import { GoogleGenerativeAI } from "@google/generative-ai"
 import Node from "./Node"
 import BottomTextBox from "./BottomTextBox"
 import type { NodeType } from "@/types"
@@ -99,7 +100,7 @@ const MindMap: React.FC = () => {
     return { x: newX, y: newY }
   }
 
-  const createLATNode = (parentNode: NodeType, position: { x: number; y: number }) => {
+  const createLATNode = async (parentNode: NodeType, position: { x: number; y: number }) => {
     const latNode: NodeType = {
       id: Date.now().toString(),
       type: "LAT",
@@ -112,8 +113,11 @@ const MindMap: React.FC = () => {
 
     setNodes((prevNodes) => [...prevNodes, latNode])
 
-    setTimeout(() => {
-      const latResponse = "Simulated LLM response."
+    try {
+      const ai = new GoogleGenerativeAI(process.env.NEXT_PUBLIC_GEMINI_API_KEY as string)
+      const model = ai.getGenerativeModel({ model: "gemini-1.5-flash-pro" })
+      const result = await model.generateContent(parentNode.text)
+      const latResponse = await result.response
       const { x: uqtX, y: uqtY } = calculateNewNodePosition(latNode)
 
       const uqtNode: NodeType = {
@@ -127,11 +131,19 @@ const MindMap: React.FC = () => {
 
       setNodes((prevNodes) => {
         const updatedNodes = prevNodes.map((node) =>
-          node.id === latNode.id ? { ...node, text: latResponse, isLoading: false } : node,
+          node.id === latNode.id ? { ...node, text: latResponse.text(), isLoading: false } : node,
         )
         return [...updatedNodes, uqtNode]
       })
-    }, 1000)
+    } catch (error) {
+      console.error("Error generating content:", error)
+      // Optionally, handle the error state in the UI
+      setNodes((prevNodes) =>
+        prevNodes.map((node) =>
+          node.id === latNode.id ? { ...node, text: "Error generating response.", isLoading: false } : node,
+        ),
+      )
+    }
   }
 
   const handleTextSubmit = (text: string) => {
@@ -149,25 +161,28 @@ const MindMap: React.FC = () => {
         return true
       })
 
-      if (selectedNode.type === "COT" || selectedNode.type === "UQT") {
-        const { x, y } = calculateNewNodePosition(selectedNode)
+      const parentNode = updatedNodes.find((n) => n.id === selectedNode.id)
 
-        if (selectedNode.type === "COT") {
-          const uqtNode: NodeType = {
-            id: Date.now().toString(),
-            type: "UQT",
-            text: "Enter text...",
-            x,
-            y,
-            parentId: selectedNode.id,
+      if (parentNode) {
+        if (parentNode.type === "COT" || parentNode.type === "UQT") {
+          const { x, y } = calculateNewNodePosition(parentNode)
+          if (parentNode.type === "COT") {
+            const uqtNode: NodeType = {
+              id: Date.now().toString(),
+              type: "UQT",
+              text: "Enter text...",
+              x,
+              y,
+              parentId: parentNode.id,
+            }
+            setNodes([...nodesToKeep, uqtNode])
+          } else if (parentNode.type === "UQT") {
+            setNodes(nodesToKeep)
+            createLATNode(parentNode, { x, y })
           }
-          setNodes([...nodesToKeep, uqtNode])
-        } else if (selectedNode.type === "UQT") {
+        } else {
           setNodes(nodesToKeep)
-          createLATNode(selectedNode, { x, y })
         }
-      } else {
-        setNodes(nodesToKeep)
       }
 
       setSelectedNode(null)
