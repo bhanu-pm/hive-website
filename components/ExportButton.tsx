@@ -20,7 +20,7 @@ const ExportButton = ({ nodes }: ExportButtonProps) => {
   return (
     <button
       onClick={handleExport}
-      className="absolute top-4 right-4 bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded transition-transform hover:scale-110"
+      className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded transition-transform hover:scale-110"
     >
       <Download size={20} />
     </button>

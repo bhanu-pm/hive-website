@@ -7,6 +7,7 @@ import Node from "./Node"
 import BottomTextBox from "./BottomTextBox"
 import type { NodeType } from "@/types"
 import ExportButton from "./ExportButton"
+import { ModeToggle } from "./ModeToggle"
 
 const MindMap: React.FC = () => {
   const [nodes, setNodes] = useState<NodeType[]>([])
@@ -252,6 +253,10 @@ const MindMap: React.FC = () => {
 
   return (
     <div className="relative w-full h-screen" onClick={handleBackgroundClick} onMouseUp={() => setIsDragging(false)}>
+      <div className="absolute top-4 right-4 flex items-center space-x-2">
+        <ExportButton nodes={nodes} />
+        <ModeToggle />
+      </div>
       <svg className="absolute top-0 left-0 w-full h-full pointer-events-none">
         {nodes.map((node) => {
           if (!node.parentId) return null
@@ -273,7 +278,6 @@ const MindMap: React.FC = () => {
         />
       ))}
       <BottomTextBox selectedNode={selectedNode} onSubmit={handleTextSubmit} />
-      <ExportButton nodes={nodes} />
     </div>
   )
 }
