@@ -2,7 +2,7 @@
 
 import type React from "react"
 import { useState, useEffect, useCallback } from "react"
-import { GoogleGenerativeAI } from "@google/generative-ai"
+import { GoogleGenerativeAI, type Content } from "@google/generative-ai"
 import Node from "./Node"
 import BottomTextBox from "./BottomTextBox"
 import type { NodeType } from "@/types"
@@ -100,6 +100,28 @@ const MindMap: React.FC = () => {
     return { x: newX, y: newY }
   }
 
+  const getChatHistory = (leafNode: NodeType): Content[] => {
+    const history: Content[] = []
+    let currentNode: NodeType | undefined = leafNode
+
+    while (currentNode && currentNode.type !== "COT") {
+      if (currentNode.type === "UQT") {
+        history.unshift({ role: "user", parts: [{ text: currentNode.text }] })
+      } else if (currentNode.type === "LAT") {
+        if (currentNode.text && !currentNode.isLoading && currentNode.text !== "Error generating response.") {
+          history.unshift({ role: "model", parts: [{ text:currentNode.text }] })
+        }
+      }
+
+      if (currentNode.parentId) {
+        currentNode = nodes.find((n: NodeType) => n.id === currentNode?.parentId)
+      } else {
+        currentNode = undefined
+      }
+    }
+    return history
+  }
+
   const createLATNode = async (parentNode: NodeType, position: { x: number; y: number }) => {
     const latNode: NodeType = {
       id: Date.now().toString(),
@@ -116,8 +138,9 @@ const MindMap: React.FC = () => {
     try {
       const ai = new GoogleGenerativeAI(process.env.NEXT_PUBLIC_GEMINI_API_KEY as string)
       const model = ai.getGenerativeModel({ model: "gemini-2.5-flash-lite" })
+      const history = getChatHistory(parentNode)
       const result = await model.generateContent({
-        contents: [{ role: "user", parts: [{ text: parentNode.text }] }],
+        contents: history,
         systemInstruction: "You are helping me study. Answer everything in as few words as possible. Don't be verbose.",
       })
       const latResponse = await result.response
