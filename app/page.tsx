@@ -19,13 +19,13 @@ export default function Home() {
       const effectiveWidth = window.innerWidth - offset * 2
       const effectiveHeight = window.innerHeight - offset * 2
 
-      const cols = Math.floor(effectiveWidth / cellSize)
-      const rows = Math.floor(effectiveHeight / cellSize)
+      const cols = Math.floor(effectiveWidth / cellSize) + 1
+      const rows = Math.floor(effectiveHeight / cellSize) + 1
 
-      const xOffset = offset + (effectiveWidth - cols * cellSize) / 2
-      const yOffset = offset + (effectiveHeight - rows * cellSize) / 2
+      const xOffset = offset + (effectiveWidth - (cols - 1) * cellSize) / 2
+      const yOffset = offset + (effectiveHeight - (rows - 1) * cellSize) / 2
 
-      for (let i = 0; i <= rows * cols; i++) {
+      for (let i = 0; i < rows * cols; i++) {
         const x = xOffset + (i % cols) * cellSize
         const y = yOffset + Math.floor(i / cols) * cellSize
         newDots.push(
