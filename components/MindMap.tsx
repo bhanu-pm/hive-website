@@ -7,6 +7,7 @@ import Node from "./Node"
 import BottomTextBox from "./BottomTextBox"
 import type { NodeType } from "@/types"
 import ExportButton from "./ExportButton"
+import UploadButton from "./UploadButton"
 import { ModeToggle } from "./ModeToggle"
 
 const MindMap: React.FC = () => {
@@ -34,6 +35,10 @@ const MindMap: React.FC = () => {
   useEffect(() => {
     localStorage.setItem("mindmap-nodes", JSON.stringify(nodes))
   }, [nodes])
+
+  const handleUpload = (uploadedNodes: NodeType[]) => {
+    setNodes(uploadedNodes)
+  }
 
   const handleNodeMove = (id: string, x: number, y: number) => {
     setIsDragging(true)
@@ -258,6 +263,7 @@ const MindMap: React.FC = () => {
       </div>
       <div className="absolute top-4 right-4 flex items-center space-x-2">
         <ExportButton nodes={nodes} />
+        <UploadButton onUpload={handleUpload} />
         <ModeToggle />
       </div>
       <svg className="absolute top-0 left-0 w-full h-full pointer-events-none">
