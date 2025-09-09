@@ -52,9 +52,11 @@ const BottomTextBox = ({ selectedNode, onSubmit }: BottomTextBoxProps) => {
     : ""
 
   return (
-    <form onSubmit={handleSubmit} className="absolute bottom-4 left-4 right-4" autoComplete="off">
-      <div
-        className={`flex items-center bg-white dark:bg-gray-800 rounded-lg p-2 transition-shadow duration-300 ${glowClass}`}
+    <div className="absolute bottom-4 left-4 right-4">
+      <form
+        onSubmit={handleSubmit}
+        className={`flex items-center bg-white dark:bg-gray-800 rounded-3xl p-2 transition-shadow duration-300 ${glowClass}`}
+        autoComplete="off"
       >
         {IconComponent && <IconComponent className="text-black dark:text-white mr-2 w-6 h-6 stroke-[3]" />}
         <input
@@ -67,8 +69,8 @@ const BottomTextBox = ({ selectedNode, onSubmit }: BottomTextBoxProps) => {
           disabled={!selectedNode}
           autoComplete="off"
         />
-      </div>
-    </form>
+      </form>
+    </div>
   )
 }
 
