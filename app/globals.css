@@ -42,3 +42,15 @@
 .glow-lat {
   box-shadow: 0 0 30px 9px rgba(249, 115, 222, 0.35);
 }
+
+.dark .glow-cot-dark {
+  box-shadow: 0 0 30px 9px rgba(163, 230, 53, 0.5);
+}
+
+.dark .glow-uqt-dark {
+  box-shadow: 0 0 30px 9px rgba(59, 130, 246, 0.5);
+}
+
+.dark .glow-lat-dark {
+  box-shadow: 0 0 30px 9px rgba(249, 115, 222, 0.5);
+}

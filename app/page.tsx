@@ -11,18 +11,24 @@ export default function Home() {
 
   useEffect(() => {
     const generateDots = () => {
-      const newDots = []
-      const cellSize = 35
-      const cols = Math.ceil(window.innerWidth / cellSize)
-      const rows = Math.ceil(window.innerHeight / cellSize)
+      const newDots = [];
+      const cellSize = 35;
+      const offset = 35; // Offset from the edges of the page
+
+      // Adjust width and height to account for the offset
+      const effectiveWidth = window.innerWidth - offset * 2;
+      const effectiveHeight = window.innerHeight - offset * 2;
+
+      const cols = Math.ceil(effectiveWidth / cellSize);
+      const rows = Math.ceil(effectiveHeight / cellSize);
 
       for (let i = 0; i < rows * cols; i++) {
-        const x = (i % cols) * cellSize
-        const y = Math.floor(i / cols) * cellSize
+        const x = offset + (i % cols) * cellSize;
+        const y = offset + Math.floor(i / cols) * cellSize;
         newDots.push(
           <div
             key={i}
-            className="w-[3px] h-[3px] rounded-full bg-gray-500 dark:bg-gray-200 opacity-80"
+            className="w-[3px] h-[3px] rounded-full bg-gray-600 dark:bg-gray-200 opacity-80"
             style={{
               position: "absolute",
               left: `${x}px`,
