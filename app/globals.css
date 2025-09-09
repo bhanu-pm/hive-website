@@ -43,14 +43,14 @@
   box-shadow: 0 0 30px 9px rgba(249, 115, 222, 0.35);
 }
 
-.dark .glow-cot-dark {
-  box-shadow: 0 0 30px 9px rgba(163, 230, 53, 0.5);
+.dark .glow-cot-selected {
+  box-shadow: 0 0 30px 9px rgba(192, 255, 110, 0.5);
 }
 
-.dark .glow-uqt-dark {
-  box-shadow: 0 0 30px 9px rgba(59, 130, 246, 0.5);
+.dark .glow-uqt-selected {
+  box-shadow: 0 0 30px 9px rgba(90, 160, 255, 0.5);
 }
 
-.dark .glow-lat-dark {
-  box-shadow: 0 0 30px 9px rgba(249, 115, 222, 0.5);
+.dark .glow-lat-selected {
+  box-shadow: 0 0 30px 9px rgba(255, 140, 230, 0.5);
 }

@@ -60,11 +60,13 @@ const Node = ({ node, onMove, onSelect, onAdd, onDelete, isSelected }: NodeProps
     LAT: Bot,
   }[node.type]
 
-  const glowClass = {
-    COT: "glow-cot-dark",
-    UQT: "glow-uqt-dark",
-    LAT: "glow-lat-dark",
-  }[node.type]
+  const glowClass = isSelected
+    ? {
+        COT: "glow-cot-selected",
+        UQT: "glow-uqt-selected",
+        LAT: "glow-lat-selected",
+      }[node.type]
+    : ""
 
   return (
     <div className="group" style={{ position: "absolute", left: node.x, top: node.y }}>
@@ -76,8 +78,10 @@ const Node = ({ node, onMove, onSelect, onAdd, onDelete, isSelected }: NodeProps
         className={`rounded-full p-2 w-[200px] ${gradientClass} cursor-move transition-all ${
           isDragging ? "opacity-50" : "opacity-100"
         } ${isNodeHovered ? "scale-110" : "scale-100"} ${
-          isSelected ? `ring-4 ring-gray-500 dark:ring-white ring-opacity-100 ${glowClass}` : ""
-        }`}
+          isSelected
+            ? "ring-4 ring-gray-500 dark:ring-white ring-opacity-100 shadow-lg shadow-gray-500/60"
+            : ""
+        } ${glowClass}`}
         onMouseDown={handleMouseDown}
         onClick={handleClick}
         onDrag={handleDrag}

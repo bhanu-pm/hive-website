@@ -16,15 +16,18 @@ export default function Home() {
       const offset = 35; // Offset from the edges of the page
 
       // Adjust width and height to account for the offset
-      const effectiveWidth = window.innerWidth - offset * 2;
-      const effectiveHeight = window.innerHeight - offset * 2;
+      const effectiveWidth = window.innerWidth - offset * 2
+      const effectiveHeight = window.innerHeight - offset * 2
 
-      const cols = Math.ceil(effectiveWidth / cellSize);
-      const rows = Math.ceil(effectiveHeight / cellSize);
+      const cols = Math.floor(effectiveWidth / cellSize)
+      const rows = Math.floor(effectiveHeight / cellSize)
 
-      for (let i = 0; i < rows * cols; i++) {
-        const x = offset + (i % cols) * cellSize;
-        const y = offset + Math.floor(i / cols) * cellSize;
+      const xOffset = offset + (effectiveWidth - cols * cellSize) / 2
+      const yOffset = offset + (effectiveHeight - rows * cellSize) / 2
+
+      for (let i = 0; i <= rows * cols; i++) {
+        const x = xOffset + (i % cols) * cellSize
+        const y = yOffset + Math.floor(i / cols) * cellSize
         newDots.push(
           <div
             key={i}
