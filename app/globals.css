@@ -32,13 +32,13 @@
 }
 
 .glow-cot {
-  box-shadow: 0 0 10px 3px rgba(163, 230, 53, 0.7);
+  box-shadow: 0 0 30px 9px rgba(163, 230, 53, 0.35);
 }
 
 .glow-uqt {
-  box-shadow: 0 0 10px 3px rgba(59, 130, 246, 0.7);
+  box-shadow: 0 0 30px 9px rgba(59, 130, 246, 0.35);
 }
 
 .glow-lat {
-  box-shadow: 0 0 10px 3px rgba(249, 115, 222, 0.7);
+  box-shadow: 0 0 30px 9px rgba(249, 115, 222, 0.35);
 }

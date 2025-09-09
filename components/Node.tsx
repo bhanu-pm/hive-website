@@ -70,7 +70,9 @@ const Node = ({ node, onMove, onSelect, onAdd, onDelete, isSelected }: NodeProps
         className={`rounded-full p-2 w-[200px] ${gradientClass} cursor-move transition-all ${
           isDragging ? "opacity-50" : "opacity-100"
         } ${isNodeHovered ? "scale-110" : "scale-100"} ${
-          isSelected ? "ring-4 ring-fuchsia-300 ring-opacity-100 shadow-lg shadow-fuchsia-300/60" : ""
+          isSelected
+            ? "ring-4 ring-gray-500 dark:ring-white ring-opacity-100 shadow-lg dark:shadow-white/60 shadow-gray-500/60"
+            : ""
         }`}
         onMouseDown={handleMouseDown}
         onClick={handleClick}
