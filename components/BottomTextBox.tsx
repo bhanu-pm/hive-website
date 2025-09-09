@@ -64,9 +64,15 @@ const BottomTextBox = ({ selectedNode, onSubmit }: BottomTextBoxProps) => {
           type="text"
           value={text}
           onChange={(e) => setText(e.target.value)}
-          placeholder={selectedNode ? "Enter text..." : "Select a node to edit"}
+          placeholder={
+            selectedNode
+              ? selectedNode.type === "LAT"
+                ? "Cannot edit AI-generated text"
+                : "Enter text..."
+              : "Select a node to edit"
+          }
           className="flex-grow bg-transparent text-black dark:text-white outline-none"
-          disabled={!selectedNode}
+          disabled={!selectedNode || selectedNode.type === "LAT"}
           autoComplete="off"
         />
       </form>

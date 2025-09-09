@@ -295,7 +295,7 @@ const Connection: React.FC<{ from: NodeType; to: NodeType }> = ({ from, to }) =>
       x2={to.x + 100}
       y2={to.y + 25}
       strokeWidth="3"
-      className="glow stroke-gray-300 dark:stroke-white"
+      className="glow stroke-black dark:stroke-white"
     />
   )
 }

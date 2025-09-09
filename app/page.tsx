@@ -22,7 +22,7 @@ export default function Home() {
         newDots.push(
           <div
             key={i}
-            className="w-[3px] h-[3px] rounded-full bg-gray-700 dark:bg-gray-300 opacity-80"
+            className="w-[3px] h-[3px] rounded-full bg-gray-500 dark:bg-gray-200 opacity-80"
             style={{
               position: "absolute",
               left: `${x}px`,
