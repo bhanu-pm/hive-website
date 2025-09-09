@@ -253,6 +253,9 @@ const MindMap: React.FC = () => {
 
   return (
     <div className="relative w-full h-screen" onClick={handleBackgroundClick} onMouseUp={() => setIsDragging(false)}>
+      <div className="absolute top-4 left-4">
+        <h1 className="text-4xl font-mono text-black dark:text-white">MIND HIVE</h1>
+      </div>
       <div className="absolute top-4 right-4 flex items-center space-x-2">
         <ExportButton nodes={nodes} />
         <ModeToggle />
