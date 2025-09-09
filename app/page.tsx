@@ -13,7 +13,7 @@ export default function Home() {
     const generateDots = () => {
       const newDots = [];
       const cellSize = 35;
-      const offset = 35; // Offset from the edges of the page
+      const offset = 15; // Offset from the edges of the page
 
       // Adjust width and height to account for the offset
       const effectiveWidth = window.innerWidth - offset * 2
