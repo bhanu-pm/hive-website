@@ -22,7 +22,7 @@ export default function Home() {
         newDots.push(
           <div
             key={i}
-            className="w-[3px] h-[3px] rounded-full bg-white opacity-20"
+            className="w-[3px] h-[3px] rounded-full bg-slate-900 dark:bg-white opacity-20"
             style={{
               position: "absolute",
               left: `${x}px`,
@@ -44,7 +44,7 @@ export default function Home() {
 
   return (
     <DndProvider backend={HTML5Backend}>
-      <div className="min-h-screen bg-gradient-to-br from-gray-950 to-indigo-950 relative overflow-hidden">
+      <div className="min-h-screen bg-gradient-to-br from-white to-sky-200 dark:from-gray-800 dark:to-indigo-950 relative overflow-hidden">
         <div className="absolute inset-0">{dots}</div>
         <MindMap />
       </div>

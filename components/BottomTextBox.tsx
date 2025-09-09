@@ -43,17 +43,27 @@ const BottomTextBox = ({ selectedNode, onSubmit }: BottomTextBoxProps) => {
       }[selectedNode.type]
     : null
 
+  const glowClass = selectedNode
+    ? {
+        COT: "glow-cot",
+        UQT: "glow-uqt",
+        LAT: "glow-lat",
+      }[selectedNode.type]
+    : ""
+
   return (
     <form onSubmit={handleSubmit} className="absolute bottom-4 left-4 right-4" autoComplete="off">
-      <div className="flex items-center bg-gray-800 rounded-lg p-2">
-        {IconComponent && <IconComponent className="text-white mr-2 w-6 h-6 stroke-[3]" />}
+      <div
+        className={`flex items-center bg-white dark:bg-gray-800 rounded-lg p-2 transition-shadow duration-300 ${glowClass}`}
+      >
+        {IconComponent && <IconComponent className="text-black dark:text-white mr-2 w-6 h-6 stroke-[3]" />}
         <input
           id="bottom-textbox"
           type="text"
           value={text}
           onChange={(e) => setText(e.target.value)}
           placeholder={selectedNode ? "Enter text..." : "Select a node to edit"}
-          className="flex-grow bg-transparent text-white outline-none"
+          className="flex-grow bg-transparent text-black dark:text-white outline-none"
           disabled={!selectedNode}
           autoComplete="off"
         />

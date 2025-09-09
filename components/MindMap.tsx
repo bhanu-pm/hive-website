@@ -23,7 +23,7 @@ const MindMap: React.FC = () => {
       const initialNode: NodeType = {
         id: "1",
         type: "COT",
-        text: "You are a philosopher.",
+        text: "Enter Topic/Subject name",
         x: window.innerWidth / 2 - 100,
         y: window.innerHeight / 2 - 25,
       }
