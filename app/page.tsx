@@ -53,7 +53,7 @@ export default function Home() {
 
   return (
     <DndProvider backend={HTML5Backend}>
-      <div className="min-h-screen bg-gradient-to-br from-white to-sky-200 dark:from-gray-800 dark:to-sky-200 relative overflow-hidden">
+      <div className="min-h-screen bg-gradient-to-br from-white to-sky-200 dark:from-black dark:to-sky-200 relative overflow-hidden">
         <div className="absolute inset-0">{dots}</div>
         <MindMap />
       </div>
